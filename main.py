@@ -51,10 +51,13 @@ def get_config():
 
 
 def get_token() -> str:
+    """
+    Returns token as string
+    Token should be located in token/.token
+    """
     try:
         token_file = open("token/.token", "r")
-        token = token_file.readline()
-        return token
+        return token_file.readline()
     except IOError:
         print("Error reading token")
 
@@ -65,4 +68,9 @@ intents.presences = False
 
 client = commands.Bot(command_prefix=config[0], intents=intents)
 
-client.run(get_token())
+token = get_token()
+if token.isspace():  # exit if token is empty
+    print("No token specified! Put token in token/.token")
+    exit()
+
+client.run(token)

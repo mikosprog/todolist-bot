@@ -1,6 +1,7 @@
 import discord
+from discord.ext import commands
 
-config = ["", ""]
+config: list[str] = ["", ""]
 
 
 def get_config():
@@ -47,3 +48,21 @@ def get_config():
         print("Config: status set to a default value    " + bot_status)
     global config
     config = [bot_prefix, bot_status]
+
+
+def get_token() -> str:
+    try:
+        token_file = open("token/.token", "r")
+        token = token_file.readline()
+        return token
+    except IOError:
+        print("Error reading token")
+
+
+intents = discord.Intents.default()
+intents.typing = False
+intents.presences = False
+
+client = commands.Bot(command_prefix=config[0], intents=intents)
+
+client.run(get_token())

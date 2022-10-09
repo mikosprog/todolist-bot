@@ -18,8 +18,8 @@ def get_config():
     bot_status: str = ""
 
     config_file = open("config/config", "r")
-    line_num += 1
     for line in config_file.readlines():
+        line_num += 1
         if line.startswith(";"):  # ignore comments
             continue
         elif line.startswith("prefix:"):

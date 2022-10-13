@@ -20,7 +20,7 @@ def get_config():
     config_file = open("config/config", "r")
     for line in config_file.readlines():
         line_num += 1
-        if line.startswith(";"):  # ignore comments
+        if line.startswith(";"):
             continue
         elif line.startswith("prefix:"):
             if not prefix:
@@ -73,4 +73,5 @@ if token.isspace():  # exit if token is empty
     print("No token specified! Put token in token/.token")
     exit()
 
+# run the bot
 client.run(token)

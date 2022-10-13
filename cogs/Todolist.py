@@ -8,11 +8,21 @@ class Todolist:  # Skeleton of 'Todolist' class
         self.elements = elements
         self.num_of_elements = num_of_elements
 
-    def save_to_file(self):
-        return
+    @staticmethod
+    def save_to_file(self, list_name):
+        with open("../lists/" + list_name, "w") as list_file:
+            for line in self.elements:
+                list_file.writelines(line)
 
-    def read_from_file(self):
-        return
+    @staticmethod
+    def read_from_file(self, list_name):
+        with open("../lists/" + list_name, "r") as list_file:
+            line_num: int
+            lines: list[str]
+            for lines in list_file.readlines():
+                line_num += 1
+            self.elements = lines
+            self.num_of_elements = line_num
 
 
 class TodolistCommands(commands.Cog):   # Skeleton of 'TodolistCommands' class
